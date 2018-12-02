@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import entity.Result;
 import entity.StatusCode;
 
+import java.util.List;
+
 /**
  * @author geekerstar
  * @date 2018/12/2
@@ -47,5 +49,11 @@ public class LabelController {
     public Result deleteById(@PathVariable String labelId){
         labelService.deleteById(labelId);
         return new Result(true, StatusCode.OK,"删除成功");
+    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public Result findSearch(@RequestBody Label label){
+        List<Label> list = labelService.findSearch(label);
+        return new Result(true,StatusCode.OK,"查询成功",list);
     }
 }
