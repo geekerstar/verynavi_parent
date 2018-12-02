@@ -10,6 +10,7 @@
     <modules>
         <module>verynavi_common</module>
         <module>verynavi_base</module>
+        <module>verynavi_recruit</module>
     </modules>
     <packaging>pom</packaging>
 
