@@ -11,3 +11,5 @@ spring:
   jpa:
     database: MySQL
     show-sql: true
+  redis:
+    host: 10.211.55.8
