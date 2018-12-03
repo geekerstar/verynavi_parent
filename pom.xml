@@ -13,6 +13,7 @@
         <module>verynavi_recruit</module>
         <module>verynavi_qa</module>
         <module>verynavi_article</module>
+        <module>verynavi_gathering</module>
     </modules>
     <packaging>pom</packaging>
 
