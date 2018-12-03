@@ -14,6 +14,7 @@
         <module>verynavi_qa</module>
         <module>verynavi_article</module>
         <module>verynavi_gathering</module>
+        <module>verynavi_spit</module>
     </modules>
     <packaging>pom</packaging>
 
