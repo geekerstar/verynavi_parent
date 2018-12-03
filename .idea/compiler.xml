@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="verynavi_base" />
         <module name="verynavi_common" />
+        <module name="verynavi_qa" />
         <module name="verynavi_recruit" />
       </profile>
     </annotationProcessing>
