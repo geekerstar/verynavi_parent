@@ -12,6 +12,7 @@
         <module>verynavi_base</module>
         <module>verynavi_recruit</module>
         <module>verynavi_qa</module>
+        <module>verynavi_article</module>
     </modules>
     <packaging>pom</packaging>
 
