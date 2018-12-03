@@ -8,7 +8,7 @@ import java.util.List;
  * Description:
  */
 
-public class PageResult <T> {
+public class PageResult<T> {
     private long total;
     private List<T> rows;
 

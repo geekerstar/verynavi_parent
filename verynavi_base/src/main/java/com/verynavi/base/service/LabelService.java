@@ -32,24 +32,24 @@ public class LabelService {
     @Autowired
     private IdWorker idWorker;
 
-    public List<Label> findAll(){
+    public List<Label> findAll() {
         return labelDao.findAll();
     }
 
-    public Label findById(String id){
+    public Label findById(String id) {
         return labelDao.findById(id).get();
     }
 
-    public void save(Label label){
-        label.setId(idWorker.nextId()+"");
+    public void save(Label label) {
+        label.setId(idWorker.nextId() + "");
         labelDao.save(label);
     }
 
-    public void update(Label label){
+    public void update(Label label) {
         labelDao.save(label);
     }
 
-    public void deleteById(String id){
+    public void deleteById(String id) {
         labelDao.deleteById(id);
     }
 
@@ -89,9 +89,9 @@ public class LabelService {
         });
     }
 
-    public Page<Label> pageQuery(Label label, int page, int size){
+    public Page<Label> pageQuery(Label label, int page, int size) {
         //封装分页对象
-        Pageable pageable = PageRequest.of(page-1,size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         return labelDao.findAll(new Specification<Label>() {
             /**
              * 功能描述:
@@ -124,6 +124,6 @@ public class LabelService {
                 //where labelname like "%小明%" and state = "1"
                 return cb.and(parr);
             }
-        },pageable);
+        }, pageable);
     }
 }

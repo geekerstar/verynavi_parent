@@ -34,13 +34,14 @@ public class RecruitService {
     @Autowired
     private IdWorker idWorker;
 
-    public List<Recruit> recommend(){
+    public List<Recruit> recommend() {
         return recruitDao.findTop4ByStateOrderByCreatetimeDesc("2");
     }
 
-    public List<Recruit> newList(){
+    public List<Recruit> newList() {
         return recruitDao.findTop12ByStateNotOrderByCreatetimeDesc("0");
     }
+
     /**
      * 查询全部列表
      *

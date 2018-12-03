@@ -4,77 +4,101 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+
 /**
  * 实体类
- * @author Administrator
  *
+ * @author Administrator
  */
 @Entity
-@Table(name="tb_column")
-public class Column implements Serializable{
+@Table(name = "tb_column")
+public class Column implements Serializable {
 
-	@Id
-	private String id;//ID
+    @Id
+    /**
+     * ID
+     */
+    private String id;
+    /**
+     * 专栏名称
+     */
+    private String name;
+    /**
+     * 专栏简介
+     */
+    private String summary;
+    /**
+     * 用户ID
+     */
+    private String userid;
+    /**
+     * 申请日期
+     */
+    private java.util.Date createtime;
+    /**
+     * 审核日期
+     */
+    private java.util.Date checktime;
+    /**
+     * 状态
+     */
+    private String state;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	private String name;//专栏名称
-	private String summary;//专栏简介
-	private String userid;//用户ID
-	private java.util.Date createtime;//申请日期
-	private java.util.Date checktime;//审核日期
-	private String state;//状态
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getSummary() {
+        return summary;
+    }
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
-	public String getSummary() {
-		return summary;
-	}
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
+    public String getUserid() {
+        return userid;
+    }
 
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
-	public java.util.Date getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(java.util.Date createtime) {
-		this.createtime = createtime;
-	}
+    public java.util.Date getCreatetime() {
+        return createtime;
+    }
 
-	public java.util.Date getChecktime() {
-		return checktime;
-	}
-	public void setChecktime(java.util.Date checktime) {
-		this.checktime = checktime;
-	}
+    public void setCreatetime(java.util.Date createtime) {
+        this.createtime = createtime;
+    }
 
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
+    public java.util.Date getChecktime() {
+        return checktime;
+    }
 
+    public void setChecktime(java.util.Date checktime) {
+        this.checktime = checktime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
 
 }
