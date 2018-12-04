@@ -15,7 +15,7 @@
         <module name="verynavi_search" />
         <module name="verynavi_sms" />
         <module name="verynavi_spit" />
-        <module name="vn_user" />
+        <module name="verynavi_user" />
       </profile>
     </annotationProcessing>
   </component>
