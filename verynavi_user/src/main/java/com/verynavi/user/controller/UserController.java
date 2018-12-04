@@ -5,11 +5,14 @@ import com.verynavi.user.service.UserService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import util.JwtUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,13 +31,24 @@ public class UserController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Result login(@RequestBody User user){
         user = userService.login(user.getMobile(),user.getPassword());
         if(user==null){
             return new Result(false,StatusCode.LOGINERROR,"登录失败");
         }
-        return new Result(true,StatusCode.OK,"登录成功");
+        String token = jwtUtil.createJWT(user.getId(),user.getMobile(),"user");
+        Map<String,Object> map = new HashMap<>();
+        map.put("token",token);
+        map.put("roles","user");
+        return new Result(true,StatusCode.OK,"登录成功",map);
     }
 
     /**
@@ -107,6 +121,16 @@ public class UserController {
         return new Result(true, StatusCode.OK, "修改成功");
     }
 
+    /**
+     * 删除 必须有admin角色才能删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public Result delete(@PathVariable String id){
+        userService.deleteById(id);
+        return new Result(true,StatusCode.OK,"删除成功");
+    }
 
     /**
      * 发送短信验证码，不是真的发送，而是把手机号写入消息队列中
