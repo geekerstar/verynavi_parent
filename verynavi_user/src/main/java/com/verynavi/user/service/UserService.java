@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 
@@ -40,6 +40,9 @@ public class UserService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
 
     /**
@@ -95,6 +98,8 @@ public class UserService {
      */
     public void add(User user) {
         user.setId(idWorker.nextId() + "");
+        //密码加密
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setFollowcount(0);
         user.setFanscount(0);
         user.setOnline(0L);
@@ -201,4 +206,12 @@ public class UserService {
     }
 
 
+
+    public User login(String mobile, String password) {
+        User user = userDao.findByMobile(mobile);
+        if(user!=null && encoder.matches(password,user.getPassword())){
+            return user;
+        }
+        return null;
+    }
 }

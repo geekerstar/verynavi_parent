@@ -24,6 +24,15 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    public Result login(@RequestBody Admin admin){
+        Admin adminLogin = adminService.login(admin);
+        if(adminLogin==null){
+            return new Result(false,StatusCode.LOGINERROR,"登录失败");
+        }
+        //使得前后单可以通话的操作，采用JWT实现
+        return new Result(true,StatusCode.OK,"登录成功");
+    }
+
 
     /**
      * 查询全部数据
