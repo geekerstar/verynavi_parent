@@ -1,5 +1,6 @@
 package com.verynavi.qa.controller;
 
+import com.verynavi.qa.client.LabelClient;
 import com.verynavi.qa.pojo.Problem;
 import com.verynavi.qa.service.ProblemService;
 import entity.PageResult;
@@ -27,6 +28,15 @@ public class ProblemController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private LabelClient labelClient;
+
+    @RequestMapping(value = "/label/{labelId}",method = RequestMethod.GET)
+    public Result findByLabelId(@PathVariable String labelId){
+        Result result=labelClient.findById(labelId);
+        return result;
+    }
 
     /**
      * 查询全部数据
