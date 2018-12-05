@@ -65,5 +65,19 @@ public class FriendController {
         }
     }
 
+    @RequestMapping(value = "/{friendid}",method = RequestMethod.DELETE)
+    public Result deleteFriend(@PathVariable String friendid){
+        //验证是否登录，并且拿到当前用户的id
+        Claims claims =(Claims) request.getAttribute("claims_user");
+        if(claims==null){
+            //说明当前用户没有user角色
+            return new Result(false,StatusCode.LOGINERROR,"权限不足");
+        }
+        //得到当前登录用户的id
+        String userid = claims.getId();
+        friendService.deleteFriend(userid,friendid);
+        userClient.updatefanscountandfollowcount(userid,friendid,-1);
+        return new Result(true,StatusCode.OK,"删除成功");
+    }
 
 }

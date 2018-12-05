@@ -57,4 +57,16 @@ public class FriendService {
         noFriendDao.save(noFriend);
         return 1;
     }
+
+    public void deleteFriend(String userid, String friendid) {
+        //删除含有表中userid到friendid这条数据
+        friendDao.deletfriend(userid,friendid);
+        //更新friendid到userid的islike为0
+        friendDao.updateIslike("0",friendid,userid);
+        //非好友表中添加数据
+        NoFriend nofriend =new NoFriend();
+        nofriend.setUserId(userid);
+        nofriend.setFriendId(friendid);
+        noFriendDao.save(nofriend);
+    }
 }
