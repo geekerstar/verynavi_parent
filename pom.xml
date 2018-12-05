@@ -20,6 +20,8 @@
         <module>verynavi_sms</module>
         <module>verynavi_eureka</module>
         <module>verynavi_friend</module>
+        <module>verynavi_manager</module>
+        <module>verynavi_web</module>
     </modules>
     <packaging>pom</packaging>
 
