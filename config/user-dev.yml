@@ -1,0 +1,27 @@
+server:
+  port: 9008
+spring:
+  application:
+    name: verynavi-user #指定服务名
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.211.55.8:3306/tensquare_user?characterEncoding=UTF-8
+    username: root
+    password: root
+  jpa:
+    database: MySQL
+    show-sql: true
+  redis:
+    host: 10.211.55.8
+  rabbitmq:
+    host: 10.211.55.8
+jwt:
+  config:
+    key: verynavi
+    ttl: 3600000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true

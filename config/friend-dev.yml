@@ -1,0 +1,23 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: verynavi‐friend #指定服务名
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.211.55.8:3306/tensquare_friend?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa:
+    database: MySQL
+    show‐sql: true
+    generate-ddl: true  #自动生成表结构
+jwt:
+  config:
+    key: verynavi
+eureka:
+  client:
+      service‐url:
+        defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true

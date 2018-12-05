@@ -1,0 +1,14 @@
+server:
+  port: 9009
+spring:
+  application:
+    name: verynavi-sms
+  rabbitmq:
+    host: 10.211.55.8
+
+aliyun:
+  sms:
+    accessKeyId: LTAIxkr6ol9lZSLn
+    accessKeySecret: z76bkK8aDHSgEy0wEeZtP83rObG8il
+    template_code: SMS_152285724
+    sign_name: 极客之星
