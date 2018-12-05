@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * description 异常处理类
  */
 @RestControllerAdvice
-public class BaseExceptionHandler {
+public class LabelExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public Result exception(Exception e) {
