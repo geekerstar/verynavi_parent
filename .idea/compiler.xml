@@ -10,6 +10,7 @@
         <module name="verynavi_base" />
         <module name="verynavi_common" />
         <module name="verynavi_eureka" />
+        <module name="verynavi_friend" />
         <module name="verynavi_gathering" />
         <module name="verynavi_qa" />
         <module name="verynavi_recruit" />
