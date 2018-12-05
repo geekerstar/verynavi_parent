@@ -1,0 +1,15 @@
+server:
+  port: 12000
+spring:
+  application:
+    name: verynavi-config
+  cloud:
+    config:
+      server:
+        git:
+          uri:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

@@ -22,6 +22,7 @@
         <module>verynavi_friend</module>
         <module>verynavi_manager</module>
         <module>verynavi_web</module>
+        <module>verynavi_config</module>
     </modules>
     <packaging>pom</packaging>
 
