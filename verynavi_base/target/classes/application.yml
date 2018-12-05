@@ -11,3 +11,12 @@ spring:
   jpa:
     datasource: mysql
     show-sql: true
+    generate-ddl: true
+  rabbitmq:
+    host: 10.211.55.8
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
