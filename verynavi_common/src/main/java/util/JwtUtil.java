@@ -8,15 +8,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Date;
 
-/**
- * Created by Administrator on 2018/4/11.
- */
+
 @ConfigurationProperties("jwt.config")
 public class JwtUtil {
 
-    private String key; // 代表 加盐
+    /**
+     * 加盐
+     */
+    private String key;
 
-    private long ttl;//一个小时
+    /**
+     * 一个小时
+     */
+    private long ttl;
 
     public String getKey() {
         return key;

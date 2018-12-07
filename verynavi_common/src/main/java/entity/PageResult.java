@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Author: Geekerstar
  * Date: 2018/12/1 20:42
- * Description:
+ * Description: 分页结果类
  */
 
 public class PageResult<T> {

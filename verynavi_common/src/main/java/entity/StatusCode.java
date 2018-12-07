@@ -3,7 +3,7 @@ package entity;
 /**
  * Author: Geekerstar
  * Date: 2018/12/1 20:42
- * Description:
+ * Description: 定义返回码
  */
 
 public class StatusCode {
