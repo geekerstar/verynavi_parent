@@ -160,14 +160,14 @@ public class ProblemService {
     /**
      * 根据labelid 查询最新回答的问题列表
      *
-     * @param labelid
-     * @param page
-     * @param rows
+     * @param labelid  标签ID
+     * @param page  页码
+     * @param size  页大小
      * @return
      */
-    public Page<Problem> newList(String labelid, int page, int rows) {
+    public Page<Problem> newList(String labelid, int page, int size) {
         // 创建分页对象
-        PageRequest pageRequest = PageRequest.of(page - 1, rows);
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.newList(labelid, pageRequest);
     }
 
@@ -175,14 +175,14 @@ public class ProblemService {
     /**
      * 根据labelid 查询热门回答的问题列表
      *
-     * @param labelid
-     * @param page
-     * @param rows
+     * @param labelid 标签ID
+     * @param page  页码
+     * @param size  页大小
      * @return
      */
-    public Page<Problem> hotList(String labelid, int page, int rows) {
+    public Page<Problem> hotList(String labelid, int page, int size) {
         // 创建分页对象
-        PageRequest pageRequest = PageRequest.of(page - 1, rows);
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.hotList(labelid, pageRequest);
     }
 
@@ -191,12 +191,12 @@ public class ProblemService {
      *
      * @param labelid
      * @param page
-     * @param rows
+     * @param size
      * @return
      */
-    public Page<Problem> waitList(String labelid, int page, int rows) {
+    public Page<Problem> waitList(String labelid, int page, int size) {
         // 创建分页对象
-        PageRequest pageRequest = PageRequest.of(page - 1, rows);
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.waitList(labelid, pageRequest);
     }
 

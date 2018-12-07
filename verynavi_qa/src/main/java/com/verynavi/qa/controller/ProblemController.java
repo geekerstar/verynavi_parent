@@ -113,7 +113,7 @@ public class ProblemController {
     }
 
     /**
-     * 查询最新回答问题列表
+     * 根据标签ID查询最新回答问题列表
      *
      * @param labelid
      * @param page
@@ -121,9 +121,10 @@ public class ProblemController {
      * @return
      */
     @RequestMapping(value = "/newlist/{labelid}/{page}/{size}", method = RequestMethod.GET)
-    public Result newList(@PathVariable(value = "label") String labelid, @PathVariable(value = "page") int page, @PathVariable(value = "size") int size) {
+    public Result newList(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
         Page<Problem> pageData = problemService.newList(labelid, page, size);
-        return new Result(true, StatusCode.OK, "查询成功", new PageResult<Problem>(pageData.getTotalElements(), pageData.getContent()));
+        PageResult<Problem> pageResult = new PageResult<>(pageData.getTotalElements(),pageData.getContent());
+        return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 
     /**
@@ -135,7 +136,7 @@ public class ProblemController {
      * @return
      */
     @RequestMapping(value = "/hotlist/{labelid}/{page}/{size}", method = RequestMethod.GET)
-    public Result hotList(@PathVariable(value = "label") String labelid, @PathVariable(value = "page") int page, @PathVariable(value = "size") int size) {
+    public Result hotList(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
         Page<Problem> pageData = problemService.hotList(labelid, page, size);
         PageResult<Problem> pageResult = new PageResult<>(pageData.getTotalElements(), pageData.getContent());
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
@@ -150,7 +151,7 @@ public class ProblemController {
      * @return
      */
     @RequestMapping(value = "/waitlist/{labelid}/{page}/{size}", method = RequestMethod.GET)
-    public Result waitList(@PathVariable(value = "label") String labelid, @PathVariable(value = "page") int page, @PathVariable(value = "size") int size) {
+    public Result waitList(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
         Page<Problem> pageData = problemService.waitList(labelid, page, size);
         PageResult<Problem> pageResult = new PageResult<>(pageData.getTotalElements(), pageData.getContent());
         return new Result(true, StatusCode.OK, "查询成功", pageResult);

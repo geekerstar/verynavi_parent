@@ -21,7 +21,7 @@ public interface ProblemDao extends JpaRepository<Problem, String>, JpaSpecifica
      * @param labelid
      * @return
      */
-    @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid=? ORDER BY replytime DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_problem WHERE id IN (SELECT problemid FROM  tb_pl WHERE labelid = 1) AND reply > 0 ORDER BY replytime DESC", nativeQuery = true)
     Page<Problem> newList(String labelid, Pageable pageable);
 
     /**
@@ -31,7 +31,7 @@ public interface ProblemDao extends JpaRepository<Problem, String>, JpaSpecifica
      * @param pageable
      * @return
      */
-    @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid=? ORDER BY reply DESC", nativeQuery = true)
+    @Query(value = "select p from Problem p where p.id in (select problemid from Pl where labelid = ?1) order by p.reply desc", nativeQuery = true)
     Page<Problem> hotList(String labelid, Pageable pageable);
 
     /**
@@ -41,6 +41,6 @@ public interface ProblemDao extends JpaRepository<Problem, String>, JpaSpecifica
      * @param pageable
      * @return
      */
-    @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid=? AND reply=0 ORDER BY createtime DESC", nativeQuery = true)
+    @Query(value = "select p from Problem p where p.id in (select problemid from Pl where labelid = ?1) and p.reply = 0 order by p.createtime desc", nativeQuery = true)
     Page<Problem> waitList(String labelid, Pageable pageable);
 }
