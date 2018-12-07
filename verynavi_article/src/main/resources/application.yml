@@ -13,6 +13,10 @@ spring:
     show-sql: true
   redis:
     host: 10.211.55.8
+  data:
+    mongodb:
+      host: 10.211.55.8
+      database: recruitdb
 eureka:
   client:
     service-url:
