@@ -32,6 +32,7 @@ public class ProblemController {
     @Autowired
     private LabelClient labelClient;
 
+
     @RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
     public Result findByLabelId(@PathVariable String labelId) {
         Result result = labelClient.findById(labelId);
