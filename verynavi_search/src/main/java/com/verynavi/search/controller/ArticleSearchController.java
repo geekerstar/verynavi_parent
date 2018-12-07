@@ -26,7 +26,7 @@ public class ArticleSearchController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Result save(@RequestBody Article article) {
-        articleSearchService.save(article);
+        articleSearchService.add(article);
         return new Result(true, StatusCode.OK, "保存成功");
     }
 

@@ -19,11 +19,11 @@ public class ArticleSearchService {
 //    private IdWorker idWorker;
 
     /**
-     * 保存方法
+     * 增加文章
      *
      * @param article
      */
-    public void save(Article article) {
+    public void add(Article article) {
 //        article.setId(idWorker.nextId()+"");
         articleSearchDao.save(article);
     }
