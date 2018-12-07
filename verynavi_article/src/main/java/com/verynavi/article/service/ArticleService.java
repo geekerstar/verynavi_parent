@@ -94,6 +94,7 @@ public class ArticleService {
      * @param article
      */
     public void update(Article article) {
+        //删除缓存
         redisTemplate.delete("article_" + article.getId());
         articleDao.save(article);
     }
@@ -104,6 +105,7 @@ public class ArticleService {
      * @param id
      */
     public void deleteById(String id) {
+        //删除缓存
         redisTemplate.delete("article_" + id);
         articleDao.deleteById(id);
     }
@@ -185,7 +187,8 @@ public class ArticleService {
      */
     public Article findById(String id) {
         // 先从缓存中查询
-        Article article = (Article) redisTemplate.opsForValue().get("article_" + id);
+        Article article = (Article)redisTemplate.opsForValue().get("article_" + id);
+        //如果缓存没有则到数据库查询并放入缓存
         if (article == null) {
             article = articleDao.findById(id).get();
             // 存入redis缓存   存10秒之后自动消失
