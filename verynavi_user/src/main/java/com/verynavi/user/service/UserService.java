@@ -21,6 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -100,7 +101,7 @@ public class UserService {
     }
 
     /**
-     * 增加
+     * 增加（pre)
      *
      * @param user
      */
@@ -116,6 +117,26 @@ public class UserService {
         user.setLastdate(new Date());
         userDao.save(user);
     }
+
+//    public void add(User user,String code){
+//        //判断验证码是否正确
+//        String syscode = (String)redisTemplate.opsForValue().get("smscode_"+user.getMobile());
+//        //提取系统正确的验证码
+//        if(syscode==null){
+//            throw new RuntimeException("请点击获取短信验证码");
+//        }
+//        if (!syscode.equals(code)){
+//            throw new RuntimeException("验证码输入不正确");
+//        }
+//        user.setId(idWorker.nextId()+"");
+//        user.setFollowcount(0);
+//        user.setFanscount(0);
+//        user.setOnline(0L);
+//        user.setRegdate(new Date());
+//        user.setUpdatedate(new Date());
+//        user.setLastdate(new Date());
+//        userDao.save(user);
+//    }
 
     /**
      * 修改

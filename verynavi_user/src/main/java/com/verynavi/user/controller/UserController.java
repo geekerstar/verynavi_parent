@@ -161,7 +161,7 @@ public class UserController {
     }
 
     /**
-     * 用户注册
+     * 用户注册(pre)
      *
      * @param user
      * @param code
@@ -180,5 +180,11 @@ public class UserController {
         userService.add(user);
         return new Result(true, StatusCode.OK, "注册成功");
     }
+
+//    @RequestMapping(value = "/register/{code}",method = RequestMethod.POST)
+//    public Result register(@RequestBody User user,@PathVariable String code){
+//        userService.add(user,code);
+//        return new Result(true,StatusCode.OK,"注册成功");
+//    }
 
 }
