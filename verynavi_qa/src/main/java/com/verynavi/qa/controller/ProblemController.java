@@ -33,6 +33,11 @@ public class ProblemController {
     private LabelClient labelClient;
 
 
+    /**
+     * 根据标签查找
+     * @param labelId
+     * @return
+     */
     @RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
     public Result findByLabelId(@PathVariable String labelId) {
         Result result = labelClient.findById(labelId);

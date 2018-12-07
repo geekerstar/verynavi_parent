@@ -23,7 +23,13 @@ public class FriendService {
     @Autowired
     private UserClient userClient;
 
-
+    /**
+     * 向喜欢列表中添加记录
+     * @param userid
+     * @param friendid
+     * @return
+     */
+    @Transactional
     public int addFriend(String userid, String friendid) {
         //先判断userid到friendid是否有数据，有就是重复添加好友，返回0
         Friend friend = friendDao.findByUseridAndFriendid(userid, friendid);
@@ -45,6 +51,12 @@ public class FriendService {
         return 1;
     }
 
+    /**
+     * 向不喜欢列表中添加记录
+     * @param userid
+     * @param friendid
+     * @return
+     */
     public int addNoFriend(String userid, String friendid) {
         //先判断是否已经是非好友
         NoFriend noFriend = noFriendDao.findByUseridAndFriendid(userid, friendid);
@@ -58,6 +70,11 @@ public class FriendService {
         return 1;
     }
 
+    /**
+     * 删除好友
+     * @param userid
+     * @param friendid
+     */
     public void deleteFriend(String userid, String friendid) {
         //删除含有表中userid到friendid这条数据
         friendDao.deletfriend(userid, friendid);

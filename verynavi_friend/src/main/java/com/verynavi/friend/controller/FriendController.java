@@ -26,7 +26,12 @@ public class FriendController {
     @Autowired
     private UserClient userClient;
 
-
+    /**
+     * 添加好友
+     * @param friendid
+     * @param type
+     * @return
+     */
     @RequestMapping(value = "/like/{friendid}/{type}", method = RequestMethod.PUT)
     public Result addFriend(@PathVariable String friendid, @PathVariable String type) {
         //验证是否登录，并且拿到当前用户的id
@@ -65,6 +70,11 @@ public class FriendController {
         }
     }
 
+    /**
+     * 删除好友
+     * @param friendid
+     * @return
+     */
     @RequestMapping(value = "/{friendid}", method = RequestMethod.DELETE)
     public Result deleteFriend(@PathVariable String friendid) {
         //验证是否登录，并且拿到当前用户的id
