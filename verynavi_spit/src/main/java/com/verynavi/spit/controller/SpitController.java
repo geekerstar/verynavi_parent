@@ -43,32 +43,32 @@ public class SpitController {
      * @return
      */
     @RequestMapping(value = "/{spitId}", method = RequestMethod.GET)
-    public Result findById(@PathVariable(value = "spitId") String spitId) {
+    public Result findById(@PathVariable String spitId) {
         Spit spit = spitService.findById(spitId);
         return new Result(true, StatusCode.OK, "查询成功", spit);
     }
 
     /**
-     * 保存
+     * 增加
      *
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public Result save(@RequestBody Spit spit) {
-        spitService.save(spit);
+    public Result add(@RequestBody Spit spit) {
+        spitService.add(spit);
         return new Result(true, StatusCode.OK, "保存成功");
     }
 
     /**
-     * 更新
+     * 修改
      *
      * @return
      */
     @RequestMapping(value = "/{spitId}", method = RequestMethod.PUT)
-    public Result save(@PathVariable(value = "spitId") String spitId, @RequestBody Spit spit) {
+    public Result update(@PathVariable(value = "spitId") String spitId, @RequestBody Spit spit) {
         spit.set_id(spitId);
         spitService.update(spit);
-        return new Result(true, StatusCode.OK, "更新成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
     /**
@@ -107,6 +107,7 @@ public class SpitController {
     public Result updateThumbup(@PathVariable("spitId") String spitId) {
         //判断当前用户是否已经点赞，但是现在我们没有做认证，所以先把userid写死
         String userid = "111";
+        //todo
         //判断当前用户是否已经点赞
         if (redisTemplate.opsForValue().get("thumbup_" + userid) != null) {
             return new Result(false, StatusCode.REPERROR, "不能重复点赞");

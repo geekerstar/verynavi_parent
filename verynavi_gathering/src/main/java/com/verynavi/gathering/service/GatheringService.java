@@ -64,11 +64,12 @@ public class GatheringService {
     /**
      * 根据ID查询实体
      *
+     * key和value是组合成为redis缓存的key，其中value属性是固定部分，key属性是变量部分
+     * 注解和redisTemplate的区别就是 它不能设置 有效的时间。而redisTemplate可以
+     *
      * @param id
      * @return
      */
-    // key和value是组合成为redis缓存的key，其中value属性是固定部分，key属性是变量部分
-    // 注解和redisTemplate的区别就是 它不能设置 有效的时间。而redisTemplate可以
     @Cacheable(key = "#id", value = "gathering")
     public Gathering findById(String id) {
         return gatheringDao.findById(id).get();

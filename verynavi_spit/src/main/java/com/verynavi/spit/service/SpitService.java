@@ -51,11 +51,12 @@ public class SpitService {
 
 
     /**
-     * 新增吐槽
+     * 发布吐槽
      *
      * @param spit
      */
-    public void save(Spit spit) {
+    public void add(Spit spit) {
+        //主键值
         spit.set_id(idWorker.nextId() + "");
         // 发布日期
         spit.setPublishtime(new Date());
@@ -75,6 +76,7 @@ public class SpitService {
             query.addCriteria(Criteria.where("_id").is(spit.getParentid()));
             Update update = new Update();
             update.inc("comment", 1);
+            mongoTemplate.updateFirst(query,update,"spit");
 
         }
         spitDao.save(spit);
@@ -120,13 +122,18 @@ public class SpitService {
 //        spitDao.save(spit);
 //    }
 
+    /**
+     * 点赞
+     * @param spitId
+     */
     public void updateThumbup(String spitId) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is("1"));
+        query.addCriteria(Criteria.where("_id").is(spitId));
         Update update = new Update();
         update.inc("thumbup", 1);
         mongoTemplate.updateFirst(query, update, "spit");
     }
 
+    //todo 3-4.2.7增加浏览量与分享数
 
 }

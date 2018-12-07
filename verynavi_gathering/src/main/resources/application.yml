@@ -8,6 +8,8 @@ spring:
     url: jdbc:mysql://10.211.55.8:3306/tensquare_gathering?characterEncoding=UTF8
     username: root
     password: root
+  redis:
+    host: 10.211.55.8
   jpa:
     database: MySQL
     show-sql: true
