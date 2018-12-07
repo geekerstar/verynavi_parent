@@ -14,7 +14,7 @@ import java.util.List;
 public interface RecruitDao extends JpaRepository<Recruit, String>, JpaSpecificationExecutor<Recruit> {
 
     /**
-     * 按状态查询 where state = ? order by createtime
+     * 查询最新职位列表（按创建日期降序排序） where state = ? order by createtime
      *
      * @param state
      * @return
@@ -22,7 +22,7 @@ public interface RecruitDao extends JpaRepository<Recruit, String>, JpaSpecifica
     public List<Recruit> findTop4ByStateOrderByCreatetimeDesc(String state);
 
     /**
-     * 按状态反向查询 where state != ? order by createtime
+     * 最新职位列表，按状态反向查询 where state != ? order by createtime
      *
      * @param state
      * @return

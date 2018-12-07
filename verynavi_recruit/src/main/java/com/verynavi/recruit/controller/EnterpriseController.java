@@ -120,7 +120,7 @@ public class EnterpriseController {
      * @return
      */
     @RequestMapping(value = "/search/hotlist", method = RequestMethod.GET)
-    public Result hostlist() {
+    public Result hotlist() {
         //1：热门
         List<Enterprise> list = enterpriseService.findByIshot("1");
         return new Result(true, StatusCode.OK, "查询成功", list);

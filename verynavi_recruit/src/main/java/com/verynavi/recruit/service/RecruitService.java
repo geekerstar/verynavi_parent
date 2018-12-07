@@ -34,10 +34,18 @@ public class RecruitService {
     @Autowired
     private IdWorker idWorker;
 
+    /**
+     * 查询推荐职位列表
+     * @return
+     */
     public List<Recruit> recommend() {
         return recruitDao.findTop4ByStateOrderByCreatetimeDesc("2");
     }
 
+    /**
+     * 最新职位列表
+     * @return
+     */
     public List<Recruit> newList() {
         return recruitDao.findTop12ByStateNotOrderByCreatetimeDesc("0");
     }
