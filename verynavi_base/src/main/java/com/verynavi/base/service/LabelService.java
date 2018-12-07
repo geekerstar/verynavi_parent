@@ -75,6 +75,11 @@ public class LabelService {
         labelDao.deleteById(id);
     }
 
+    /**
+     * 构建条件查询
+     * @param label
+     * @return
+     */
     public List<Label> findSearch(Label label) {
         return labelDao.findAll(new Specification<Label>() {
             /**
@@ -111,6 +116,13 @@ public class LabelService {
         });
     }
 
+    /**
+     * 带分页的条件查询
+     * @param label
+     * @param page
+     * @param size
+     * @return
+     */
     public Page<Label> pageQuery(Label label, int page, int size) {
         //封装分页对象
         Pageable pageable = PageRequest.of(page - 1, size);
