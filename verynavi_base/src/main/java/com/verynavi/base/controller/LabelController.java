@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author geekerstar
  * @date 2018/12/2
- * description
+ * description 标签控制层
  */
 @RestController
 @CrossOrigin
@@ -26,29 +26,54 @@ public class LabelController {
     @Autowired
     private LabelService labelService;
 
+    /**
+     * 查询全部列表
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET)
     public Result findAll() {
         return new Result(true, StatusCode.OK, "查询成功", labelService.findAll());
     }
 
+    /**
+     * 根据ID查询标签
+     * @param labelId
+     * @return
+     */
     @RequestMapping(value = "/{labelId}", method = RequestMethod.GET)
     public Result findById(@PathVariable String labelId) {
         return new Result(true, StatusCode.OK, "查询成功", labelService.findById(labelId));
     }
 
+    /**
+     * 增加标签
+     * @param label
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public Result save(@RequestBody Label label) {
-        labelService.save(label);
+    public Result add(@RequestBody Label label) {
+        labelService.add(label);
         return new Result(true, StatusCode.OK, "添加成功");
     }
 
+    /**
+     * 修改标签
+     * @param labelId
+     * @param label
+     * @return
+     */
     @RequestMapping(value = "/{labelId}", method = RequestMethod.PUT)
     public Result update(@PathVariable String labelId, @RequestBody Label label) {
         label.setId(labelId);
         labelService.update(label);
-        return new Result(true, StatusCode.OK, "更新成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
+    /**
+     * 删除标签
+     * @param labelId
+     * @return
+     */
     @RequestMapping(value = "/{labelId}", method = RequestMethod.DELETE)
     public Result deleteById(@PathVariable String labelId) {
         labelService.deleteById(labelId);

@@ -10,7 +10,7 @@ import util.IdWorker;
 /**
  * @author geekerstar
  * @date 2018/12/2
- * description
+ * description 基础微服务
  */
 @SpringBootApplication
 @EnableEurekaClient
