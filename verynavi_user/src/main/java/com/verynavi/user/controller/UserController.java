@@ -5,10 +5,12 @@ import com.verynavi.user.service.UserService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import util.JwtUtil;
 
@@ -34,6 +36,7 @@ public class UserController {
     @Autowired
     private JwtUtil jwtUtil;
 
+
     /**
      * 更新好友粉丝数和用户关注数
      *
@@ -53,6 +56,7 @@ public class UserController {
      * @param user
      * @return
      */
+    //todo JWT
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody User user) {
         user = userService.login(user.getMobile(), user.getPassword());
@@ -147,6 +151,7 @@ public class UserController {
         userService.deleteById(id);
         return new Result(true, StatusCode.OK, "删除成功");
     }
+
 
     /**
      * 发送短信验证码，不是真的发送，而是把手机号写入消息队列中
