@@ -99,6 +99,7 @@ public class AdminService {
      * @param admin
      */
     public void add(Admin admin) {
+        //主键值
         admin.setId(idWorker.nextId() + "");
         //密码加密
         admin.setPassword(encoder.encode(admin.getPassword()));

@@ -21,7 +21,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -135,6 +134,9 @@ public class UserService {
 //        user.setRegdate(new Date());
 //        user.setUpdatedate(new Date());
 //        user.setLastdate(new Date());
+//        //加密后的密码
+//        String newpassword = encoder.encode(user.getPassword());
+//        user.setPassword(newpassword);
 //        userDao.save(user);
 //    }
 
