@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
+
 import java.util.Date;
 import java.util.List;
 
 /**
- *
  * 吐槽的业务层
  */
 @Service
@@ -32,6 +32,7 @@ public class SpitService {
 
     /**
      * 查询所有
+     *
      * @return
      */
     public List<Spit> findAll() {
@@ -40,6 +41,7 @@ public class SpitService {
 
     /**
      * 根据id去查询
+     *
      * @param id
      * @return
      */
@@ -50,10 +52,11 @@ public class SpitService {
 
     /**
      * 新增吐槽
+     *
      * @param spit
      */
     public void save(Spit spit) {
-        spit.set_id(idWorker.nextId()+"");
+        spit.set_id(idWorker.nextId() + "");
         // 发布日期
         spit.setPublishtime(new Date());
         //浏览量
@@ -67,11 +70,11 @@ public class SpitService {
         //状态
         spit.setState("1");
         // 判断吐槽中是否有父id ，有父id 需要父id查询出来吐槽对象，并更新它的回复数
-        if (spit.getParentid()!=null && !"".equals(spit.getParentid())){
+        if (spit.getParentid() != null && !"".equals(spit.getParentid())) {
             Query query = new Query();
             query.addCriteria(Criteria.where("_id").is(spit.getParentid()));
             Update update = new Update();
-            update.inc("comment",1);
+            update.inc("comment", 1);
 
         }
         spitDao.save(spit);
@@ -79,6 +82,7 @@ public class SpitService {
 
     /**
      * 更新
+     *
      * @param spit
      */
     public void update(Spit spit) {
@@ -87,6 +91,7 @@ public class SpitService {
 
     /**
      * 删除id
+     *
      * @param id
      */
     public void deleteById(String id) {
@@ -95,16 +100,17 @@ public class SpitService {
 
     /**
      * 根据父级id查询吐槽
+     *
      * @param parentid
      * @param page
      * @param size
      * @return
      */
-    public Page<Spit> findByParentid(String parentid,int page,int size) {
+    public Page<Spit> findByParentid(String parentid, int page, int size) {
         // 创建分页对象
-        PageRequest pageRequest = PageRequest.of(page,size);
+        PageRequest pageRequest = PageRequest.of(page, size);
         // 执行查询并返回
-        return spitDao.findByParentid(parentid,pageRequest);
+        return spitDao.findByParentid(parentid, pageRequest);
     }
 
     //方式一：效率有问题
@@ -114,14 +120,13 @@ public class SpitService {
 //        spitDao.save(spit);
 //    }
 
-    public void updateThumbup(String spitId){
+    public void updateThumbup(String spitId) {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is("1"));
         Update update = new Update();
-        update.inc("thumbup",1);
-        mongoTemplate.updateFirst(query,update,"spit");
+        update.inc("thumbup", 1);
+        mongoTemplate.updateFirst(query, update, "spit");
     }
-
 
 
 }

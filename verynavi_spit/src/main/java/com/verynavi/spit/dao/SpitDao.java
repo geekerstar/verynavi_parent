@@ -6,13 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- *
  * 吐槽的持久层接口
  */
-public interface SpitDao extends MongoRepository<Spit,String> {
+public interface SpitDao extends MongoRepository<Spit, String> {
 
     /**
      * 根据吐槽的父ID去查询吐槽列表
+     *
      * @param parentid
      * @param pageable
      * @return

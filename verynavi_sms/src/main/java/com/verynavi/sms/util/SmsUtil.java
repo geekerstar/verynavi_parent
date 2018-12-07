@@ -1,4 +1,5 @@
 package com.verynavi.sms.util;
+
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsRequest;
@@ -8,15 +9,18 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
 /**
  * 短信工具类
- * @author Administrator
  *
+ * @author Administrator
  */
 @Component
 public class SmsUtil {
@@ -37,15 +41,16 @@ public class SmsUtil {
 
     /**
      * 发送短信
-     * @param mobile 手机号
+     *
+     * @param mobile        手机号
      * @param template_code 模板号
-     * @param sign_name 签名
-     * @param param 参数
+     * @param sign_name     签名
+     * @param param         参数
      * @return
      * @throws ClientException
      */
-    public SendSmsResponse sendSms(String mobile,String template_code,String sign_name,String param) throws ClientException {
-        String accessKeyId =env.getProperty("aliyun.sms.accessKeyId");
+    public SendSmsResponse sendSms(String mobile, String template_code, String sign_name, String param) throws ClientException {
+        String accessKeyId = env.getProperty("aliyun.sms.accessKeyId");
         String accessKeySecret = env.getProperty("aliyun.sms.accessKeySecret");
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -73,8 +78,8 @@ public class SmsUtil {
         return sendSmsResponse;
     }
 
-    public  QuerySendDetailsResponse querySendDetails(String mobile,String bizId) throws ClientException {
-        String accessKeyId =env.getProperty("accessKeyId");
+    public QuerySendDetailsResponse querySendDetails(String mobile, String bizId) throws ClientException {
+        String accessKeyId = env.getProperty("accessKeyId");
         String accessKeySecret = env.getProperty("accessKeySecret");
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");

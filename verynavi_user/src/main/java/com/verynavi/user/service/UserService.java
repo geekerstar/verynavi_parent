@@ -52,6 +52,7 @@ public class UserService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
     /**
      * 查询全部列表
      *
@@ -132,7 +133,7 @@ public class UserService {
      */
     public void deleteById(String id) {
         String token = (String) request.getAttribute("claims_admin");
-        if(token==null || "".equals(token)){
+        if (token == null || "".equals(token)) {
             throw new RuntimeException("权限不足!");
         }
 //        String header = request.getHeader("Authorization");
@@ -237,13 +238,14 @@ public class UserService {
 
     /**
      * 登录
+     *
      * @param mobile
      * @param password
      * @return
      */
     public User login(String mobile, String password) {
         User user = userDao.findByMobile(mobile);
-        if(user!=null && encoder.matches(password,user.getPassword())){
+        if (user != null && encoder.matches(password, user.getPassword())) {
             return user;
         }
         return null;
@@ -251,13 +253,14 @@ public class UserService {
 
     /**
      * 更新粉丝数和关注数
+     *
      * @param x
      * @param userid
      * @param friendid
      */
     @Transactional
     public void updatefanscountandfollowcount(int x, String userid, String friendid) {
-        userDao.updatefanscount(x,friendid);
-        userDao.updatefollowcount(x,userid);
+        userDao.updatefanscount(x, friendid);
+        userDao.updatefollowcount(x, userid);
     }
 }

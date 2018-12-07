@@ -26,143 +26,150 @@ import com.verynavi.gathering.pojo.Gathering;
  * 服务层
  *
  * @author Administrator
- *
  */
 @Service
 public class GatheringService {
 
-	@Autowired
-	private GatheringDao gatheringDao;
+    @Autowired
+    private GatheringDao gatheringDao;
 
-	@Autowired
-	private IdWorker idWorker;
+    @Autowired
+    private IdWorker idWorker;
 
-	/**
-	 * 查询全部列表
-	 * @return
-	 */
-	public List<Gathering> findAll() {
-		return gatheringDao.findAll();
-	}
-
-
-	/**
-	 * 条件查询+分页
-	 * @param whereMap
-	 * @param page
-	 * @param size
-	 * @return
-	 */
-	public Page<Gathering> findSearch(Map whereMap, int page, int size) {
-		Specification<Gathering> specification = createSpecification(whereMap);
-		PageRequest pageRequest =  PageRequest.of(page-1, size);
-		return gatheringDao.findAll(specification, pageRequest);
-	}
+    /**
+     * 查询全部列表
+     *
+     * @return
+     */
+    public List<Gathering> findAll() {
+        return gatheringDao.findAll();
+    }
 
 
-	/**
-	 * 根据ID查询实体
-	 * @param id
-	 * @return
-	 */
-	// key和value是组合成为redis缓存的key，其中value属性是固定部分，key属性是变量部分
-	// 注解和redisTemplate的区别就是 它不能设置 有效的时间。而redisTemplate可以
-	@Cacheable(key = "#id",value = "gathering")
-	public Gathering findById(String id) {
-		return gatheringDao.findById(id).get();
-	}
+    /**
+     * 条件查询+分页
+     *
+     * @param whereMap
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<Gathering> findSearch(Map whereMap, int page, int size) {
+        Specification<Gathering> specification = createSpecification(whereMap);
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        return gatheringDao.findAll(specification, pageRequest);
+    }
 
-	/**
-	 * 条件查询
-	 * @param whereMap
-	 * @return
-	 */
-	public List<Gathering> findSearch(Map whereMap) {
-		Specification<Gathering> specification = createSpecification(whereMap);
-		return gatheringDao.findAll(specification);
-	}
 
-	/**
-	 * 增加
-	 * @param gathering
-	 */
-	public void add(Gathering gathering) {
-		gathering.setId( idWorker.nextId()+"" );
-		gatheringDao.save(gathering);
-	}
+    /**
+     * 根据ID查询实体
+     *
+     * @param id
+     * @return
+     */
+    // key和value是组合成为redis缓存的key，其中value属性是固定部分，key属性是变量部分
+    // 注解和redisTemplate的区别就是 它不能设置 有效的时间。而redisTemplate可以
+    @Cacheable(key = "#id", value = "gathering")
+    public Gathering findById(String id) {
+        return gatheringDao.findById(id).get();
+    }
 
-	/**
-	 * 修改
-	 * @param gathering
-	 */
-	@CacheEvict(key = "#gathering.id",value = "gathering")
-	public void update(Gathering gathering) {
-		gatheringDao.save(gathering);
-	}
+    /**
+     * 条件查询
+     *
+     * @param whereMap
+     * @return
+     */
+    public List<Gathering> findSearch(Map whereMap) {
+        Specification<Gathering> specification = createSpecification(whereMap);
+        return gatheringDao.findAll(specification);
+    }
 
-	/**
-	 * 删除
-	 * @param id
-	 */
-	@CacheEvict(key = "#id",value = "gathering")
-	public void deleteById(String id) {
-		gatheringDao.deleteById(id);
-	}
+    /**
+     * 增加
+     *
+     * @param gathering
+     */
+    public void add(Gathering gathering) {
+        gathering.setId(idWorker.nextId() + "");
+        gatheringDao.save(gathering);
+    }
 
-	/**
-	 * 动态条件构建
-	 * @param searchMap
-	 * @return
-	 */
-	private Specification<Gathering> createSpecification(Map searchMap) {
+    /**
+     * 修改
+     *
+     * @param gathering
+     */
+    @CacheEvict(key = "#gathering.id", value = "gathering")
+    public void update(Gathering gathering) {
+        gatheringDao.save(gathering);
+    }
 
-		return new Specification<Gathering>() {
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    @CacheEvict(key = "#id", value = "gathering")
+    public void deleteById(String id) {
+        gatheringDao.deleteById(id);
+    }
 
-			@Override
-			public Predicate toPredicate(Root<Gathering> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				List<Predicate> predicateList = new ArrayList<Predicate>();
+    /**
+     * 动态条件构建
+     *
+     * @param searchMap
+     * @return
+     */
+    private Specification<Gathering> createSpecification(Map searchMap) {
+
+        return new Specification<Gathering>() {
+
+            @Override
+            public Predicate toPredicate(Root<Gathering> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                List<Predicate> predicateList = new ArrayList<Predicate>();
                 // 编号
-                if (searchMap.get("id")!=null && !"".equals(searchMap.get("id"))) {
-                	predicateList.add(cb.like(root.get("id").as(String.class), "%"+(String)searchMap.get("id")+"%"));
+                if (searchMap.get("id") != null && !"".equals(searchMap.get("id"))) {
+                    predicateList.add(cb.like(root.get("id").as(String.class), "%" + (String) searchMap.get("id") + "%"));
                 }
                 // 活动名称
-                if (searchMap.get("name")!=null && !"".equals(searchMap.get("name"))) {
-                	predicateList.add(cb.like(root.get("name").as(String.class), "%"+(String)searchMap.get("name")+"%"));
+                if (searchMap.get("name") != null && !"".equals(searchMap.get("name"))) {
+                    predicateList.add(cb.like(root.get("name").as(String.class), "%" + (String) searchMap.get("name") + "%"));
                 }
                 // 大会简介
-                if (searchMap.get("summary")!=null && !"".equals(searchMap.get("summary"))) {
-                	predicateList.add(cb.like(root.get("summary").as(String.class), "%"+(String)searchMap.get("summary")+"%"));
+                if (searchMap.get("summary") != null && !"".equals(searchMap.get("summary"))) {
+                    predicateList.add(cb.like(root.get("summary").as(String.class), "%" + (String) searchMap.get("summary") + "%"));
                 }
                 // 详细说明
-                if (searchMap.get("detail")!=null && !"".equals(searchMap.get("detail"))) {
-                	predicateList.add(cb.like(root.get("detail").as(String.class), "%"+(String)searchMap.get("detail")+"%"));
+                if (searchMap.get("detail") != null && !"".equals(searchMap.get("detail"))) {
+                    predicateList.add(cb.like(root.get("detail").as(String.class), "%" + (String) searchMap.get("detail") + "%"));
                 }
                 // 主办方
-                if (searchMap.get("sponsor")!=null && !"".equals(searchMap.get("sponsor"))) {
-                	predicateList.add(cb.like(root.get("sponsor").as(String.class), "%"+(String)searchMap.get("sponsor")+"%"));
+                if (searchMap.get("sponsor") != null && !"".equals(searchMap.get("sponsor"))) {
+                    predicateList.add(cb.like(root.get("sponsor").as(String.class), "%" + (String) searchMap.get("sponsor") + "%"));
                 }
                 // 活动图片
-                if (searchMap.get("image")!=null && !"".equals(searchMap.get("image"))) {
-                	predicateList.add(cb.like(root.get("image").as(String.class), "%"+(String)searchMap.get("image")+"%"));
+                if (searchMap.get("image") != null && !"".equals(searchMap.get("image"))) {
+                    predicateList.add(cb.like(root.get("image").as(String.class), "%" + (String) searchMap.get("image") + "%"));
                 }
                 // 举办地点
-                if (searchMap.get("address")!=null && !"".equals(searchMap.get("address"))) {
-                	predicateList.add(cb.like(root.get("address").as(String.class), "%"+(String)searchMap.get("address")+"%"));
+                if (searchMap.get("address") != null && !"".equals(searchMap.get("address"))) {
+                    predicateList.add(cb.like(root.get("address").as(String.class), "%" + (String) searchMap.get("address") + "%"));
                 }
                 // 是否可见
-                if (searchMap.get("state")!=null && !"".equals(searchMap.get("state"))) {
-                	predicateList.add(cb.like(root.get("state").as(String.class), "%"+(String)searchMap.get("state")+"%"));
+                if (searchMap.get("state") != null && !"".equals(searchMap.get("state"))) {
+                    predicateList.add(cb.like(root.get("state").as(String.class), "%" + (String) searchMap.get("state") + "%"));
                 }
                 // 城市
-                if (searchMap.get("city")!=null && !"".equals(searchMap.get("city"))) {
-                	predicateList.add(cb.like(root.get("city").as(String.class), "%"+(String)searchMap.get("city")+"%"));
+                if (searchMap.get("city") != null && !"".equals(searchMap.get("city"))) {
+                    predicateList.add(cb.like(root.get("city").as(String.class), "%" + (String) searchMap.get("city") + "%"));
                 }
 
-				return cb.and( predicateList.toArray(new Predicate[predicateList.size()]));
+                return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
 
-			}
-		};
+            }
+        };
 
-	}
+    }
 
 }

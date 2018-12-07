@@ -19,16 +19,15 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     /**
      * 放行， 当返回true的时候放行
+     *
      * @param request
      * @param response
      * @param handler
      * @return
-     * @throws Exception
-     *
-     * 通过往请求域中存入参数，来实现权限的甄别
-     *        如果是普通用户存入：request.setAttribute("user_claims",claims)
-     *        如果是管理员用户存入：request.setAttribute("admin_claims",claims)
-     *        如果没有登录，就什么都不存
+     * @throws Exception 通过往请求域中存入参数，来实现权限的甄别
+     *                   如果是普通用户存入：request.setAttribute("user_claims",claims)
+     *                   如果是管理员用户存入：request.setAttribute("admin_claims",claims)
+     *                   如果没有登录，就什么都不存
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -47,10 +46,10 @@ public class JwtInterceptor implements HandlerInterceptor {
             Claims claims = jwtUtil.parseJWT(token);
             if (claims != null) {
                 if ("admin".equals(claims.get("roles"))) {
-                    request.setAttribute("admin_claims",claims);
+                    request.setAttribute("admin_claims", claims);
                 }
                 if ("user".equals(claims.get("roles"))) {
-                    request.setAttribute("user_claims",claims);
+                    request.setAttribute("user_claims", claims);
                 }
             }
         }

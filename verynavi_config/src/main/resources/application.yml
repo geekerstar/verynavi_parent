@@ -9,7 +9,7 @@ spring:
         git:
           uri: https://gitee.com/geekerstar/verynavi_dev.git
   rabbitqm:
-     host: 10.211.55.8
+    host: 10.211.55.8
 management: #暴露触发消息总线的地址
   endpoints:
     web:

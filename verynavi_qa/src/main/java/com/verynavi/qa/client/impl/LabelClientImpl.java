@@ -15,6 +15,6 @@ public class LabelClientImpl implements LabelClient {
 
     @Override
     public Result findById(String labelId) {
-        return new Result(false, StatusCode.ERROR,"熔断器触发了！");
+        return new Result(false, StatusCode.ERROR, "熔断器触发了！");
     }
 }

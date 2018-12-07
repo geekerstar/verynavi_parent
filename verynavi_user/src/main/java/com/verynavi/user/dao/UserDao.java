@@ -24,21 +24,23 @@ public interface UserDao extends JpaRepository<User, String>, JpaSpecificationEx
 
     /**
      * 更新粉丝数量
+     *
      * @param x
      * @param friendid
      */
     @Modifying
-    @Query(value = "update tb_user set fanscount=fanscount+? where id=?",nativeQuery = true)
-    public void updatefanscount(int x,String friendid);
+    @Query(value = "update tb_user set fanscount=fanscount+? where id=?", nativeQuery = true)
+    public void updatefanscount(int x, String friendid);
 
     /**
      * 更新关注数
+     *
      * @param x
      * @param userid
      */
     @Modifying
-    @Query(value = "update tb_user set followcount=followcount+? where  id=?",nativeQuery = true)
-    public void updatefollowcount(int x,String userid);
+    @Query(value = "update tb_user set followcount=followcount+? where  id=?", nativeQuery = true)
+    public void updatefollowcount(int x, String userid);
 
 
 }

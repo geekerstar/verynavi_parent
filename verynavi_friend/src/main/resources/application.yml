@@ -17,7 +17,7 @@ jwt:
     key: verynavi
 eureka:
   client:
-      service‐url:
-        defaultZone: http://localhost:6868/eureka
+    service‐url:
+      defaultZone: http://localhost:6868/eureka
   instance:
     prefer-ip-address: true

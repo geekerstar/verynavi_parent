@@ -17,9 +17,9 @@ public class CreateJwt {
                 .setId("66")
                 .setSubject("哈哈")
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256,"geekerstar")
-                .setExpiration(new Date(new Date().getTime()+60000))
-                .claim("role","admin");
+                .signWith(SignatureAlgorithm.HS256, "geekerstar")
+                .setExpiration(new Date(new Date().getTime() + 60000))
+                .claim("role", "admin");
         System.out.println(jwtBuilder.compact());
 
     }

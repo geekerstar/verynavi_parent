@@ -8,10 +8,11 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 /**
  * 文章搜索的持久层
  */
-public interface ArticleSearchDao extends ElasticsearchRepository<Article,String>{
+public interface ArticleSearchDao extends ElasticsearchRepository<Article, String> {
 
     /**
      * 使用关键字在文章的内容或者标题中模糊查询并分页
+     *
      * @param title
      * @param content
      * @param pageable

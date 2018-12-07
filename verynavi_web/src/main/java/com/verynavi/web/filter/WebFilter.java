@@ -38,9 +38,9 @@ public class WebFilter extends ZuulFilter {
         //得到头信息
         String header = request.getHeader("Authorization");
         //判断是否有头信息
-        if(header!=null && !"".equals(header)){
+        if (header != null && !"".equals(header)) {
             //把头信息继续向下传
-            currentContext.addZuulRequestHeader("Authorization",header);
+            currentContext.addZuulRequestHeader("Authorization", header);
         }
         return null;
     }

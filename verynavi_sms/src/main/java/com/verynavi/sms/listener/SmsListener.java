@@ -25,13 +25,13 @@ public class SmsListener {
     private SmsUtil smsUtil;
 
     @RabbitHandler
-    public void sendSms(Map<String,String> map) {
+    public void sendSms(Map<String, String> map) {
         String mobile = map.get("mobile");
         String code = map.get("code");
-        System.out.println(mobile+","+code);
+        System.out.println(mobile + "," + code);
         try {
             // 注意：这里的模板code需要做处理 Json字符串  ${code} ==> "{"code":"123"}"
-            smsUtil.sendSms(mobile,template_code,sign_name,"{\"code\":\""+code+"\"}");
+            smsUtil.sendSms(mobile, template_code, sign_name, "{\"code\":\"" + code + "\"}");
         } catch (ClientException e) {
             e.printStackTrace();
         }

@@ -19,16 +19,16 @@ import util.JwtUtil;
 public class FriendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FriendApplication.class,args);
+        SpringApplication.run(FriendApplication.class, args);
     }
 
     @Bean
     public IdWorker idWorker() {
-        return new IdWorker(1,1);
+        return new IdWorker(1, 1);
     }
 
     @Bean
-    public JwtUtil jwtUtil(){
+    public JwtUtil jwtUtil() {
         return new JwtUtil();
     }
 

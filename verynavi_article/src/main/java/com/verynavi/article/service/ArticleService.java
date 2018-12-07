@@ -90,19 +90,21 @@ public class ArticleService {
 
     /**
      * 修改
+     *
      * @param article
      */
     public void update(Article article) {
-        redisTemplate.delete("article_"+article.getId());
+        redisTemplate.delete("article_" + article.getId());
         articleDao.save(article);
     }
 
     /**
      * 删除
+     *
      * @param id
      */
     public void deleteById(String id) {
-        redisTemplate.delete("article_"+id);
+        redisTemplate.delete("article_" + id);
         articleDao.deleteById(id);
     }
 
@@ -177,6 +179,7 @@ public class ArticleService {
 
     /**
      * 根据ID查询实体
+     *
      * @param id
      * @return
      */
@@ -186,7 +189,7 @@ public class ArticleService {
         if (article == null) {
             article = articleDao.findById(id).get();
             // 存入redis缓存   存10秒之后自动消失
-            redisTemplate.opsForValue().set("article_"+article.getId(),article,10, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set("article_" + article.getId(), article, 10, TimeUnit.SECONDS);
             System.out.println("从数据库中查的");
         } else {
             System.out.println("从缓存中查询的");

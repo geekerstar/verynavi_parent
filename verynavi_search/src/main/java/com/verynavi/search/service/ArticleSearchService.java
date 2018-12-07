@@ -20,6 +20,7 @@ public class ArticleSearchService {
 
     /**
      * 保存方法
+     *
      * @param article
      */
     public void save(Article article) {
@@ -27,9 +28,9 @@ public class ArticleSearchService {
         articleSearchDao.save(article);
     }
 
-    public Page<Article> findByKeywords(String keywords,int page,int size) {
+    public Page<Article> findByKeywords(String keywords, int page, int size) {
         // 创建分页对象
-        PageRequest pageRequest = PageRequest.of(page-1, size);
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
         // 查询并返回
         return articleSearchDao.findByTitleOrContentLike(keywords, keywords, pageRequest);
     }

@@ -36,32 +36,34 @@ public class UserController {
 
     /**
      * 更新好友粉丝数和用户关注数
+     *
      * @param userid
      * @param friendid
      * @param x
      */
-    @RequestMapping(value = "/{userid}/{friendid}/{x}",method = RequestMethod.PUT)
-    public void updatefanscountandfollowcount(@PathVariable String userid,@PathVariable String friendid,@PathVariable int x){
-        userService.updatefanscountandfollowcount(x,userid,friendid);
+    @RequestMapping(value = "/{userid}/{friendid}/{x}", method = RequestMethod.PUT)
+    public void updatefanscountandfollowcount(@PathVariable String userid, @PathVariable String friendid, @PathVariable int x) {
+        userService.updatefanscountandfollowcount(x, userid, friendid);
     }
 
 
     /**
      * 登录
+     *
      * @param user
      * @return
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Result login(@RequestBody User user){
-        user = userService.login(user.getMobile(),user.getPassword());
-        if(user==null){
-            return new Result(false,StatusCode.LOGINERROR,"登录失败");
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result login(@RequestBody User user) {
+        user = userService.login(user.getMobile(), user.getPassword());
+        if (user == null) {
+            return new Result(false, StatusCode.LOGINERROR, "登录失败");
         }
-        String token = jwtUtil.createJWT(user.getId(),user.getMobile(),"user");
-        Map<String,Object> map = new HashMap<>();
-        map.put("token",token);
-        map.put("roles","user");
-        return new Result(true,StatusCode.OK,"登录成功",map);
+        String token = jwtUtil.createJWT(user.getId(), user.getMobile(), "user");
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        map.put("roles", "user");
+        return new Result(true, StatusCode.OK, "登录成功", map);
     }
 
     /**
@@ -136,13 +138,14 @@ public class UserController {
 
     /**
      * 删除 必须有admin角色才能删除
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public Result delete(@PathVariable String id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Result delete(@PathVariable String id) {
         userService.deleteById(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /**

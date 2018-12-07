@@ -29,18 +29,18 @@ public class AdminController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public Result login(@RequestBody Admin admin){
+    public Result login(@RequestBody Admin admin) {
         Admin adminLogin = adminService.login(admin);
-        if(adminLogin==null){
-            return new Result(false,StatusCode.LOGINERROR,"登录失败");
+        if (adminLogin == null) {
+            return new Result(false, StatusCode.LOGINERROR, "登录失败");
         }
         //使得前后单可以通话的操作，采用JWT实现
         //生成令牌
         String token = jwtUtil.createJWT(adminLogin.getId(), adminLogin.getLoginname(), "admin");
-        Map<String,Object> map = new HashMap<>();
-        map.put("token",token);
-        map.put("role","admin");
-        return new Result(true,StatusCode.OK,"登录成功",map);
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        map.put("role", "admin");
+        return new Result(true, StatusCode.OK, "登录成功", map);
     }
 
 
@@ -90,7 +90,6 @@ public class AdminController {
     public Result findSearch(@RequestBody Map searchMap) {
         return new Result(true, StatusCode.OK, "查询成功", adminService.findSearch(searchMap));
     }
-
 
 
     /**

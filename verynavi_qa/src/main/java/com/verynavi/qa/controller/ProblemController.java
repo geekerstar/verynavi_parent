@@ -32,9 +32,9 @@ public class ProblemController {
     @Autowired
     private LabelClient labelClient;
 
-    @RequestMapping(value = "/label/{labelId}",method = RequestMethod.GET)
-    public Result findByLabelId(@PathVariable String labelId){
-        Result result=labelClient.findById(labelId);
+    @RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
+    public Result findByLabelId(@PathVariable String labelId) {
+        Result result = labelClient.findById(labelId);
         return result;
     }
 
@@ -92,9 +92,9 @@ public class ProblemController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Result add(@RequestBody Problem problem) {
-        String token = (String)request.getAttribute("claims_user");
-        if (token==null || "".equals(token)){
-            return new Result(false,StatusCode.ACCESSERROR,"权限不足");
+        String token = (String) request.getAttribute("claims_user");
+        if (token == null || "".equals(token)) {
+            return new Result(false, StatusCode.ACCESSERROR, "权限不足");
         }
         problemService.add(problem);
         return new Result(true, StatusCode.OK, "增加成功");

@@ -20,8 +20,10 @@ public class ManageFilter extends ZuulFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
+
     /**
      * 在请求前pre或者后post执行
+     *
      * @return
      */
     @Override
@@ -31,6 +33,7 @@ public class ManageFilter extends ZuulFilter {
 
     /**
      * 多个过滤器的执行顺序，数字越小，表示越先执行
+     *
      * @return
      */
     @Override
@@ -40,6 +43,7 @@ public class ManageFilter extends ZuulFilter {
 
     /**
      * 当前过滤器是否开启true表示开启
+     *
      * @return
      */
     @Override
@@ -50,6 +54,7 @@ public class ManageFilter extends ZuulFilter {
     /**
      * 过滤器内执行的操作 return 任何object的值都表示继续执行
      * setsendzullResponse(false)表示不再继续执行
+     *
      * @return
      * @throws ZuulException
      */
@@ -60,28 +65,28 @@ public class ManageFilter extends ZuulFilter {
         //request域
         HttpServletRequest request = requestContext.getRequest();
 
-        if (request.getMethod().equals("OPTIONS")){
+        if (request.getMethod().equals("OPTIONS")) {
             return null;
         }
 
-        if(request.getRequestURI().indexOf("login")>0){
+        if (request.getRequestURI().indexOf("login") > 0) {
             return null;
         }
 
         //得到头信息
         String header = request.getHeader("Authorization");
-        if (header!=null && !"".equals(header)){
-            if (header.startsWith("Bearer ")){
+        if (header != null && !"".equals(header)) {
+            if (header.startsWith("Bearer ")) {
                 String token = header.substring(7);
-                try{
+                try {
                     Claims claims = jwtUtil.parseJWT(token);
                     String roles = (String) claims.get("roles");
-                    if (roles.equals("admin")){
+                    if (roles.equals("admin")) {
                         //把头信息转发下去，并且放行
-                        requestContext.addZuulRequestHeader("Authorization",header);
+                        requestContext.addZuulRequestHeader("Authorization", header);
                         return null;
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     //终止运行
                     requestContext.setSendZuulResponse(false);

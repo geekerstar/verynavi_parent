@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UserClient {
 
 
-    @RequestMapping(value = "/user/{userid}/{friendid}/{x]",method = RequestMethod.POST)
-    void updatefanscountandfollowcount(@PathVariable("userid") String useId, @PathVariable("friendid") String friendid,@PathVariable("x") int x);
+    @RequestMapping(value = "/user/{userid}/{friendid}/{x]", method = RequestMethod.POST)
+    void updatefanscountandfollowcount(@PathVariable("userid") String useId, @PathVariable("friendid") String friendid, @PathVariable("x") int x);
 
 
 }

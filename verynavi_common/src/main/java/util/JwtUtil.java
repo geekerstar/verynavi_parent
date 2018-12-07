@@ -14,9 +14,9 @@ import java.util.Date;
 @ConfigurationProperties("jwt.config")
 public class JwtUtil {
 
-    private String key ; // 代表 加盐
+    private String key; // 代表 加盐
 
-    private long ttl ;//一个小时
+    private long ttl;//一个小时
 
     public String getKey() {
         return key;
@@ -49,18 +49,19 @@ public class JwtUtil {
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, key).claim("roles", roles);
         if (ttl > 0) {
-            builder.setExpiration( new Date( nowMillis + ttl));
+            builder.setExpiration(new Date(nowMillis + ttl));
         }
         return builder.compact();
     }
 
     /**
      * 解析JWT
+     *
      * @param jwtStr
      * @return
      */
-    public Claims parseJWT(String jwtStr){
-        return  Jwts.parser()
+    public Claims parseJWT(String jwtStr) {
+        return Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwtStr)
                 .getBody();

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * ElasticSearch中的最小级（文档）
  * 表示一个文档类，需要指定文档是什么类型，以及在那个索引中
  */
-@Document(indexName = "tensquare_article",type = "article")
+@Document(indexName = "tensquare_article", type = "article")
 public class Article implements Serializable {
 
     @Id
@@ -20,10 +20,10 @@ public class Article implements Serializable {
      * 是否粉刺，就表示搜索的时候是整体匹配还是单词匹配
      * 是否存储，是否在页面上显示
      */
-    @Field(index = true,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
+    @Field(index = true, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String title;
 
-    @Field(index = true,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word")
+    @Field(index = true, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String content;
     /**
      * 审核状态
